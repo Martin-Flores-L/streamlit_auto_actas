@@ -160,7 +160,7 @@ class Printed(Clean):
         text2 = 'ACTA ACEPTACION PARCIAL'
         count = 0
         #Trabajando con los documentos
-        workbook = load_workbook(filename=r"plantilla\Plantilla_ActaPangeaco.xlsx")
+        workbook = load_workbook(filename=r"https://github.com/Martin-Flores-L/streamlit_auto_actas/blob/main/plantilla/Plantilla_ActaPangeaco.xlsx")
         sheet = workbook.active
 
         for i in range( len(self.csv) ):
