@@ -127,7 +127,7 @@ class Clean(Usuario):
 
     def download_excel_files(self):
         # Specify the directory
-        directory = r'Actas/'
+        directory = r'C:\Users\kher-\Proyectos\streamlit\Actas'
 
         # List all the Excel files in the directory
         files = [f for f in os.listdir(directory) if f.endswith('.xlsx')]
@@ -142,12 +142,23 @@ class Clean(Usuario):
         with open('excel_files.zip', 'rb') as f:
             data = f.read()
 
+        def delete_files(directory):
+            for filename in os.listdir(directory):
+                file_path = os.path.join(directory, filename)
+                try:
+                    if os.path.isfile(file_path):
+                        os.unlink(file_path)
+                except Exception as e:
+                    print('Failed to delete %s. Reason: %s' % (file_path, e))
+
         st.download_button(
-                label="Download zip file",
-                data=data,
-                file_name="excel_files.zip",
-                mime="application/zip"
-            )
+            label="Download zip file",
+            data=data,
+            file_name="excel_files.zip",
+            mime="application/zip"
+        )
+
+        delete_files(directory)
                                 
 
 class Printed(Clean):
