@@ -127,7 +127,7 @@ class Clean(Usuario):
 
     def download_excel_files(self):
         # Specify the directory
-        directory = r'C:\Users\kher-\Proyectos\streamlit\Actas'
+        directory = r'Actas\'
 
         # List all the Excel files in the directory
         files = [f for f in os.listdir(directory) if f.endswith('.xlsx')]
