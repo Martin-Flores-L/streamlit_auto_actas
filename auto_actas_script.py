@@ -89,7 +89,7 @@ if uploaded_file is not None:
         
     #Doownload excel file    
     elif action == "Print dataframe":
-        if st.button('Confirm'):
+        if st.button('Create xlsx files'):
             user.printed_to_excel()
             st.session_state['confirmed'] = True  # Remember that the 'Confirm' button has been clicked
 
