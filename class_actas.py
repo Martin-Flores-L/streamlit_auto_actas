@@ -4,6 +4,7 @@ from openpyxl import load_workbook
 from datetime import datetime
 import pytz
 import os
+import zipfile
 
 #Variable global para los titulos del archivo csv
 #EECC = Proveedor
@@ -61,18 +62,10 @@ class Clean(Usuario):
 
 
     #Escoger una columna a trabajar
-    def choose_to_work(self, cabecera=[]):
-        self.cabecera = [n for n in self.csv]
-
-    # Create a dictionary to map column names to their indices
-        column_dict = {n: i for i, n in enumerate(self.cabecera)}
-
-    # Use st.selectbox to let the user choose a column
-        column = st.selectbox('Choose a column to work with', options=self.cabecera)
-
+    def choose_to_work(self):
     # Get the index of the chosen column
-        title = column_dict[column]
-        return title
+        columns_to_remove = st.multiselect('Choose columns', options=self.csv.columns.tolist())
+        return columns_to_remove
 
 
     #Remover espacios en blanco
@@ -87,29 +80,14 @@ class Clean(Usuario):
 
 
     #Cuando los valores numericos mayores a 1000 tengan una coma
-    def no_comma(self, title=''):
-        #df['colname'] = df['colname'].str.replace(',', '').astype(float)
-        #c[c.iloc[:, 0] == 1]
-        x = title
-        self.csv[self.cabecera[x]] = self.csv[self.cabecera[x]].str.replace(',', '').astype(float)
+    def no_comma(self, columns): 
+        for column in columns:
+            st.session_state.csv[column] = st.session_state.csv[column].str.replace(',', '').astype(float)
         
 
     #Cambiar el titulo para similar los parametros establecidos
-    def title_change(self):
-    # Use st.selectbox to let the user choose a column
-        old_title = st.selectbox('Choose a column to rename', options=self.cabecera)
-
-    # Use st.text_input to let the user enter a new title
-        new_title = st.text_input("Enter the new title")
-
-    # Create a confirmation button
-        if st.button('Confirm'):
-            # Rename the column
-            self.csv.rename(columns={old_title: new_title}, inplace=True)
-            st.write("Cambio exitoso")
-            st.write(self.csv.columns)
-
-
+    
+                
     #Convert OC to int    
     def convert_oc_int(self):
         self.csv['OC'] = self.csv['OC'].astype(int)
@@ -126,9 +104,10 @@ class Clean(Usuario):
 
 
     #Moneda a certificar con dos decimales round 2
-    def value_rounded_2(self,title=''):
-        x = title
-        self.csv[self.cabecera[x]] = self.csv[self.cabecera[x]].round(2)
+    def value_rounded_2(self, columns):
+        for column in columns:
+            self.csv[column] = self.csv[column].round(2)
+        
 
 
     #Clean the NaN values in column posiciones
@@ -142,25 +121,32 @@ class Clean(Usuario):
 
 
     #Remove column from DataFrame
-    def remove_columns(self, column_titles=[]):     
-        self.csv = self.csv.drop(columns=column_titles)
+    def remove_columns(self, columns): 
+        st.session_state.csv = st.session_state.csv.drop(columns, axis=1)
 
 
-    def download_excel_files():
+    def download_excel_files(self):
         # Specify the directory
         directory = r'C:\Users\kher-\Proyectos\streamlit\Actas'
 
         # List all the Excel files in the directory
         files = [f for f in os.listdir(directory) if f.endswith('.xlsx')]
 
-        # Create a download button for each file
-        for file in files:
-            with open(os.path.join(directory, file), 'rb') as f:
-                st.download_button(
-                    label=f"Download {file}",
-                    data=f,
-                    file_name=file,
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        # Create a zip file
+        with zipfile.ZipFile('excel_files.zip', 'w') as zipf:
+            # Add each Excel file to the zip file
+            for file in files:
+                zipf.write(os.path.join(directory, file), arcname=file)
+
+        # Create a download button for the zip file
+        with open('excel_files.zip', 'rb') as f:
+            data = f.read()
+
+        st.download_button(
+                label="Download zip file",
+                data=data,
+                file_name="excel_files.zip",
+                mime="application/zip"
             )
                                 
 
@@ -174,7 +160,7 @@ class Printed(Clean):
         text2 = 'ACTA ACEPTACION PARCIAL'
         count = 0
         #Trabajando con los documentos
-        workbook = load_workbook(filename=r"plantilla/Plantilla_ActaPangeaco.xlsx") 
+        workbook = load_workbook(filename=r"C:\Users\kher-\Proyectos\streamlit\plantilla\Plantilla_ActaPangeaco.xlsx")
         sheet = workbook.active
 
         for i in range( len(self.csv) ):
