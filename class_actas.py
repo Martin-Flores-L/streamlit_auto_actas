@@ -204,7 +204,7 @@ class Printed(Clean):
 
             count += 1
 
-        return st.write('Se crearon {} archivos en total'.format(count))
+        return st.write('Se crearon {} archivos en total - {}'.format(count,d1))
             # if certified == 'final':
             #     workbook.save('Actas{}/{} - {} - {} - {} - {}.xlsx'.format(d1,text1,b,a,c,d1))
             # elif certified == 'parcial':
