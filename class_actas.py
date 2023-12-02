@@ -16,6 +16,22 @@ sheetslist = [key for key in sheets]
 ts = datetime.now(pytz.timezone('America/Lima')).strftime('%d.%m')
 d1 = ts
 
+#Streamlit functions
+
+# Personal Streamlit functions
+class PSF:
+
+    @st.cache(allow_output_mutation=True)
+    def st_load_data(file):
+        # Load your data here
+        pass
+
+    def clear_cache():
+        # Clear the cache data every time a file is uploaded
+        st.cache.clear()
+
+
+
 #Class
 class Usuario:
 
@@ -204,7 +220,7 @@ class Printed(Clean):
 
             count += 1
 
-        return st.write('Se crearon {} archivos en total - {}'.format(count,d1))
+        return st.write('Se crearon {} archivos en total'.format(count))
             # if certified == 'final':
             #     workbook.save('Actas{}/{} - {} - {} - {} - {}.xlsx'.format(d1,text1,b,a,c,d1))
             # elif certified == 'parcial':
