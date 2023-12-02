@@ -2,11 +2,8 @@
 import streamlit as st
 import pandas as pd
 import pytz
-import zipfile
-from io import StringIO
-from openpyxl import load_workbook
 from datetime import datetime
-from class_actas import Usuario, Clean, Printed
+from class_actas import Printed
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
@@ -33,9 +30,6 @@ if uploaded_file is not None:
 
     #Streamlit_grid config
     gb = GridOptionsBuilder.from_dataframe(dataframe)
-    # gb.configure_column("OC", 
-                        # type=["numericColumn","numberColumnFilter","customNumericFormat"], 
-                        # valueFormatter="data.OC.toLocaleString('en-US');")
     gb.configure_default_column(editable=True)
     gb.configure_column('total_OC', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2, valueFormatter="data.total_OC.toLocaleString('en-US');")
     gb.configure_column('total_certificar', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2, valueFormatter="data.total_certificar.toLocaleString('en-US');")
