@@ -14,25 +14,26 @@ st.set_page_config(layout="wide", initial_sidebar_state="auto")
 # Tittle
 st.title('Automatic Actas Pangea')
 
-# Clear cache
-@st.cache(allow_output_mutation=True)
-def load_data(file):
-    # Load your data here
-    pass
+# # Clear cache
+# @st.cache(allow_output_mutation=True)
+# def load_data(file):
+#     # Load your data here
+#     pass
 
 
 uploaded_file = st.file_uploader("Sube tu archivo")
 
+
 if uploaded_file is not None:
 
     #Clear cache
-    st.cache.clear()
+    st.runtime.legacy_caching.clear_cache()
 
-    #Load data
-    data = load_data(uploaded_file)
+    # #Load data
+    # data = load_data(uploaded_file)
 
     # Can be used wherever a "file-like" object is accepted:
-    dataframe = pd.read_csv(data, sep=';',encoding='latin-1')
+    dataframe = pd.read_csv(uploaded_file, sep=';',encoding='latin-1')
 
     #Streamlit_grid config
     gb = GridOptionsBuilder.from_dataframe(dataframe)
