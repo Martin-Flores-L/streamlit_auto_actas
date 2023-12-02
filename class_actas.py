@@ -173,7 +173,7 @@ class Clean(Usuario):
     #Show sqlite
     def show_sqlite(self):
         conn = sqlite3.connect('actas_database.db')
-        query = "SELECT * FROM actas_database"
+        query = "SELECT * FROM actas"
         df = pd.read_sql(query, conn)
         st.write(df)
         conn.close()        

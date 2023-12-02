@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS actas_database.db (
+CREATE TABLE IF NOT EXISTS actas (
     Proyecto TEXT,
     OC INTEGER,
     EECC TEXT,
