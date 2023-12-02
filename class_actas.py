@@ -5,7 +5,6 @@ from datetime import datetime
 import pytz
 import os
 import zipfile
-import sqlite3
 
 #Global variables
 #EECC = Proveedor
@@ -168,7 +167,7 @@ class Clean(Usuario):
         conn = st.connection('actas_database.db', type='sql')
 
         #Create table
-        conn.execute('CREATE TABLE IF NOT EXISTS actas (Proyecto TEXT, OC INTEGER, EECC TEXT, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
+        conn.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
                       
         self.csv.to_sql('actas_database', conn, if_exists='append', index=False)
 
