@@ -169,7 +169,7 @@ class Clean(Usuario):
     def save_sqlite(self):
 
         #Create connection
-        conn = st.connection('connections.actas_database_db', type='sql')
+        conn = st.connection('actasdatabase_db', type='sql')
 
         #Create table
         conn.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
@@ -177,7 +177,7 @@ class Clean(Usuario):
         conn.commit()
 
         #Save data
-        self.csv.to_sql('actas_database', conn, if_exists='append', index=False)
+        self.csv.to_sql('actasdatabase_db', conn, if_exists='append', index=False)
    
         conn.close()
 
