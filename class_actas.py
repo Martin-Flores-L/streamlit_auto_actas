@@ -6,17 +6,17 @@ import pytz
 import os
 import zipfile
 
-#Variable global para los titulos del archivo csv
+#Global variables
 #EECC = Proveedor
 sheets={'Proyecto':'C7', 'OC':'H10', 'EECC':'C8', 'total_OC':'C9', 'total_certificar':'H9', 'termino_obra':'E18' ,'servicio_obra':'E19','posiciones':'H8'}
 sheetslist = [key for key in sheets]
 
-#Tiempo
+#Time
 #d1 = today.strftime("%d/%m").replace('/','.')
 ts = datetime.now(pytz.timezone('America/Lima')).strftime('%d.%m')
 d1 = ts
 
-
+#Class
 class Usuario:
 
     def __init__(self, nombre, csv):

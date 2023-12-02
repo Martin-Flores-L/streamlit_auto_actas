@@ -5,9 +5,8 @@ import zipfile
 from io import StringIO
 from openpyxl import load_workbook
 from datetime import datetime
-from class_actas import Usuario, Clean, Printed
+from class_actas import Usuario, Clean, Printed, PSF
 from st_aggrid import GridOptionsBuilder, AgGrid
-
 
 #Set the page layout to wide
 st.set_page_config(layout="wide", initial_sidebar_state="auto")
@@ -15,13 +14,18 @@ st.set_page_config(layout="wide", initial_sidebar_state="auto")
 # Tittle
 st.title('Automatic Actas Pangea')
 
-
 uploaded_file = st.file_uploader("Sube tu archivo")
 
 if uploaded_file is not None:
 
+    #Clear cache
+    PSF.clear_cache()
+
+    #Load the data
+    data = PSF.st_load_data(uploaded_file)
+
     # Can be used wherever a "file-like" object is accepted:
-    dataframe = pd.read_csv(uploaded_file, sep=';',encoding='latin-1')
+    dataframe = pd.read_csv(data, sep=';',encoding='latin-1')
 
     #Streamlit_grid config
     gb = GridOptionsBuilder.from_dataframe(dataframe)
