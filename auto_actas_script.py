@@ -27,7 +27,7 @@ uploaded_file = st.file_uploader("Sube tu archivo")
 if uploaded_file is not None:
 
     #Clear cache
-    st.runtime.legacy_caching.clear_cache()
+    st.cache_data.clear()
 
     # #Load data
     # data = load_data(uploaded_file)
@@ -105,9 +105,8 @@ if uploaded_file is not None:
             user.printed_to_excel()
             st.session_state['confirmed'] = True  # Remember that the 'Confirm' button has been clicked
 
-        if 'confirmed' in st.session_state and st.button('Descargar'):
+        if 'confirmed' in st.session_state:
             user.download_excel_files()
-            st.write("Descarga exitosa")
 
 
 

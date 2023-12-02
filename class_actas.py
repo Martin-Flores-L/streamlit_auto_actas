@@ -140,7 +140,7 @@ class Clean(Usuario):
         # Create a download button for the zip file
         with open('excel_files.zip', 'rb') as f:
             data = f.read()
-
+        
         def delete_files(directory):
             for filename in os.listdir(directory):
                 file_path = os.path.join(directory, filename)
