@@ -165,7 +165,7 @@ class Clean(Usuario):
 
     #Save in sqlite                                  
     def save_sqlite(self):
-        conn = st.connection('actas_database.db', type='sqlite')
+        conn = st.connection('actas_database.db', type='sql')
 
         #Create table
         conn.execute('CREATE TABLE IF NOT EXISTS actas (Proyecto TEXT, OC INTEGER, EECC TEXT, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
