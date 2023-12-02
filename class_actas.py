@@ -14,23 +14,6 @@ sheetslist = [key for key in sheets]
 #Time
 #d1 = today.strftime("%d/%m").replace('/','.')
 ts = datetime.now(pytz.timezone('America/Lima')).strftime('%d.%m')
-d1 = ts
-
-#Streamlit functions
-
-# Personal Streamlit functions
-class PSF:
-
-    @st.cache(allow_output_mutation=True)
-    def st_load_data(file):
-        # Load your data here
-        pass
-
-    def clear_cache():
-        # Clear the cache data every time a file is uploaded
-        st.cache.clear()
-
-
 
 #Class
 class Usuario:
@@ -212,11 +195,11 @@ class Printed(Clean):
             if t_oc == t_oc_c:
                 #Final
                 sheet['D4'] = "ACTA DE ACEPTACIÓN FINAL - PANGEA"
-                workbook.save('Actas/{} - {} - {} - {} - {}.xlsx'.format(text1,b,a,c,d1))
+                workbook.save('Actas/{} - {} - {} - {} - {}.xlsx'.format(text1,b,a,c,ts))
             elif t_oc != t_oc_c:
                 #Parcial                        
                 sheet['D4'] = "ACTA DE ACEPTACIÓN PARCIAL - PANGEA"
-                workbook.save('Actas/{} - {} - {} - {} - {}.xlsx'.format(text2,b,a,c,d1))
+                workbook.save('Actas/{} - {} - {} - {} - {}.xlsx'.format(text2,b,a,c,ts))
 
             count += 1
 
