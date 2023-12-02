@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import pytz
@@ -66,7 +67,7 @@ if uploaded_file is not None:
 
     # Create a sidebar for actions
     st.sidebar.title("Actions")
-    action = st.sidebar.selectbox("Choose an action", ["Show dataframe", "Clean dataframe", "Print dataframe"])
+    action = st.sidebar.selectbox("Choose an action", ["Show dataframe", "Clean dataframe", "Print dataframe", "Show SQLite data"])
 
 
     #Show dataframe
@@ -108,7 +109,19 @@ if uploaded_file is not None:
         if 'confirmed' in st.session_state:
             user.download_excel_files()
 
+        if st.button('Save to SQLite'):
+            #Create a column with the date in my user.csv
+            user.csv['Download_date'] = datetime.now(pytz.timezone('America/Bogota')).strftime("%d/%m/%Y %H:%M:%S")
+            #Save the data in SQLite
+            user.save_sqlite()
+            #Show the data in SQLite
+            st.write("Data saved to SQLite database.")            
 
+
+    #Show SQLite data
+    elif action == "Show SQLite data":
+        #Show the data in SQLite
+        user.show_sqlite()
 
 #FALTA REQUERIMIENTO EN GITHUB
 #ACTUALIZAR EL DOWNLOAD_EXCEL_FILES

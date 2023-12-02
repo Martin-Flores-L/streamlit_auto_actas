@@ -5,6 +5,7 @@ from datetime import datetime
 import pytz
 import os
 import zipfile
+import sqlite3
 
 #Global variables
 #EECC = Proveedor
@@ -14,6 +15,8 @@ sheetslist = [key for key in sheets]
 #Time
 #d1 = today.strftime("%d/%m").replace('/','.')
 ts = datetime.now(pytz.timezone('America/Lima')).strftime('%d.%m')
+
+
 
 #Class
 class Usuario:
@@ -140,7 +143,7 @@ class Clean(Usuario):
         # Create a download button for the zip file
         with open('excel_files.zip', 'rb') as f:
             data = f.read()
-        
+
         def delete_files(directory):
             for filename in os.listdir(directory):
                 file_path = os.path.join(directory, filename)
@@ -158,7 +161,23 @@ class Clean(Usuario):
         )
 
         delete_files(directory)
-                                
+
+
+    #Save in sqlite                                  
+    def save_sqlite(self):
+        conn = sqlite3.connect('actas_database.db')
+        self.csv.to_sql('actas_database', conn, if_exists='append', index=False)
+        conn.close()
+
+
+    #Show sqlite
+    def show_sqlite(self):
+        conn = sqlite3.connect('actas_database.db')
+        query = "SELECT * FROM actas_database"
+        df = pd.read_sql(query, conn)
+        st.write(df)
+        conn.close()        
+
 
 class Printed(Clean):
 
