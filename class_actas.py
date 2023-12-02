@@ -163,11 +163,13 @@ class Clean(Usuario):
         delete_files(directory)
 
 
-    #Save in sqlite                                  
+
+    #Save data in SQLite
+
     def save_sqlite(self):
 
         #Create connection
-        conn = st.connection('actas_database_db', type='sql')
+        conn = st.connection('connections.actas_database_db', type='sql')
 
         #Create table
         conn.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
