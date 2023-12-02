@@ -165,14 +165,19 @@ class Clean(Usuario):
 
     #Save in sqlite                                  
     def save_sqlite(self):
-        conn = sqlite3.connect('actas_database.db')
+        conn = st.connection('actas_database.db', type='sqlite')
+
+        #Create table
+        conn.execute('CREATE TABLE IF NOT EXISTS actas (Proyecto TEXT, OC INTEGER, EECC TEXT, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
+                      
         self.csv.to_sql('actas_database', conn, if_exists='append', index=False)
+
         conn.close()
 
 
     #Show sqlite
     def show_sqlite(self):
-        conn = sqlite3.connect('actas_database.db')
+        conn = st.connection('actas_database.db')
         query = "SELECT * FROM actas"
         df = pd.read_sql(query, conn)
         st.write(df)
