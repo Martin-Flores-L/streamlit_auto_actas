@@ -15,13 +15,7 @@ st.set_page_config(layout="wide", initial_sidebar_state="auto")
 # Tittle
 st.title('Automatic Actas Pangea')
 
-# # Clear cache
-# @st.cache(allow_output_mutation=True)
-# def load_data(file):
-#     # Load your data here
-#     pass
-
-
+# UPLOAD FILE
 uploaded_file = st.file_uploader("Sube tu archivo")
 
 
@@ -29,6 +23,7 @@ if uploaded_file is not None:
 
     #Clear cache
     st.cache_data.clear()
+    st.session_state.clear()
 
     # #Load data
     # data = load_data(uploaded_file)
@@ -42,11 +37,11 @@ if uploaded_file is not None:
                         # type=["numericColumn","numberColumnFilter","customNumericFormat"], 
                         # valueFormatter="data.OC.toLocaleString('en-US');")
     gb.configure_default_column(editable=True)
-    gb.configure_column('total_OC', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2)
-    gb.configure_column('total_certificar', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2)
+    gb.configure_column('total_OC', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2, valueFormatter="data.total_OC.toLocaleString('en-US');")
+    gb.configure_column('total_certificar', type=['numericColumn','numberColumnFilter','customNumericFormat'], precision=2, valueFormatter="data.total_certificar.toLocaleString('en-US');")
     gb.configure_grid_options(
     groupDefaultExpanded=-1,
-    suppressColumnVirtualisation=True,
+    suppressColumnVirtualisation=False,
     groupDisplayType="groupRows",
     autoGroupColumnDef=dict(
         minWidth=250,
@@ -122,6 +117,7 @@ if uploaded_file is not None:
     elif action == "Show SQLite data":
         #Show the data in SQLite
         user.show_sqlite()
+        
 
 #FALTA REQUERIMIENTO EN GITHUB
 #ACTUALIZAR EL DOWNLOAD_EXCEL_FILES
