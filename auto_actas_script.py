@@ -116,7 +116,7 @@ if uploaded_file is not None:
     elif action == "Show data":
         
         # Show the data in SQLite
-        sbdb.run_query()
+        sbdb.run_query(database_con)
         
 
 #FALTA REQUERIMIENTO EN GITHUB
