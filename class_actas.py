@@ -172,7 +172,7 @@ class Clean(Usuario):
         conn = st.connection('actasdatabase_db', type='sql')
 
         #Create table
-        conn.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
+        conn.session.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
 
         conn.commit()
 
