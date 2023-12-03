@@ -119,9 +119,10 @@ if uploaded_file is not None:
         rows = sbdb.get_all_rows(database_con)
 
         # Convert the data to a Pandas DataFrame
-        df = pd.DataFrame(rows, columns=['id', 'EECC','Proyecto','OC','IP Hijo','total_OC', 'total_certificar','servicio_obra', 'termino_obra','posiciones', 'download_date'])
-        st.write(df)
-
+        # df = pd.DataFrame(rows, columns=['id', 'EECC','Proyecto','OC','IP Hijo','total_OC', 'total_certificar','servicio_obra', 'termino_obra','posiciones', 'download_date'])
+        # st.write(df)
+        for row in rows:
+            print(row)
         
         
 
