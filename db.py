@@ -31,7 +31,10 @@ class Supabase_db():
 
         self.dataframe = dataframe
 
-        conn.table("actas").insert(self.dataframe).execute()
+        #Convert the DataFrame to a dictionary
+        data = self.dataframe.to_dict('records')
+
+        conn.table("actas").insert(data).execute()
         return "Data saved in Supabase"
 
     
