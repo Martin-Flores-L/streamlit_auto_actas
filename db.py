@@ -3,7 +3,7 @@ from supabase import create_client, Client
 
 # Initialize connection.
 
-@st.staticmethod
+@staticmethod
 @st.cache_resource
 def init_connection():
     url = st.secrets["SUPABASE_URL"]
@@ -11,6 +11,7 @@ def init_connection():
     return create_client(url, key)
 
 supabase = init_connection()
+
 
 # Perform query.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
