@@ -18,7 +18,6 @@ uploaded_file = st.file_uploader("Sube tu archivo")
 
  #Initialize connection to supabase
 sbdb = Supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
-
 sbdb.init_connection()
 
 
@@ -28,9 +27,6 @@ if uploaded_file is not None:
     #Clear cache
     st.cache_data.clear()
     st.session_state.clear()
-
-    # #Load data
-    # data = load_data(uploaded_file)
 
     # Can be used wherever a "file-like" object is accepted:
     dataframe = pd.read_csv(uploaded_file, sep=';',encoding='latin-1')

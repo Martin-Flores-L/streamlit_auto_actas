@@ -13,10 +13,12 @@ class Supabase_db():
         return 'Usuario {}'.format(self.nombre)
     
     #function to connect to supabase
+    @staticmethod
     @st.cache_resource
-    def init_connection(self):
+    def init_connection():
         url = st.secrets["SUPABASE_URL"]
         key = st.secrets["SUPABASE_KEY"]
+
         return create_client(url, key)
 
     #function to run query in supabase
