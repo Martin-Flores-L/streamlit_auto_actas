@@ -23,7 +23,7 @@ class Supabase_db():
 
     #function to run query in supabase
     def get_all_rows(self, conn):
-        result = conn.table("actas").select("*").execute()
+        result = conn.table('actas').select('*').execute()
         return result
 
 
