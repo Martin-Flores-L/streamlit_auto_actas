@@ -173,7 +173,7 @@ class Clean(Usuario):
 
         conn.session.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
 
-        conn.commit()
+        conn.session.commit()
 
         self.csv.to_sql('actas', conn, if_exists='append', index=False)
 
