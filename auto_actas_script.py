@@ -18,7 +18,7 @@ uploaded_file = st.file_uploader("Sube tu archivo")
 
  #Initialize connection to supabase
 sbdb = Supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
-sbdb.init_connection()
+database_con = sbdb.init_connection()
 
 
 
@@ -106,7 +106,7 @@ if uploaded_file is not None:
             user.csv['Download_date'] = datetime.now(pytz.timezone('America/Bogota')).strftime("%d/%m/%Y %H:%M:%S")
            
             #Save the data in supabase
-            sbdb.save_supabase(user.csv)
+            sbdb.save_supabase(database_con, user.csv)
 
             #Show the data in SQLite
             st.write("Data saved to SQLite database.")            
