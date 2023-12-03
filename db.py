@@ -3,7 +3,7 @@ from supabase import create_client, Client
 
 # Initialize connection.
 
-class supabase_db():
+class Supabase_db():
     
     def __init__(self, url, key):
         self.url = url

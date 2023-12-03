@@ -4,7 +4,7 @@ import pandas as pd
 import pytz
 from datetime import datetime
 from class_actas import Printed
-from db import supabase_db
+from db import Supabase_db
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
