@@ -1,10 +1,8 @@
 import streamlit as st
 from supabase import create_client, Client
 
-# streamlit_app.py
-
 # Initialize connection.
-# Uses st.cache_resource to only run once.
+
 @staticmethod
 @st.cache_resource
 def init_connection():
@@ -23,9 +21,6 @@ def run_query():
 rows = run_query()
 
 # Print results.
-
-def show_data():
-    for row in rows:
-        st.write("Got lookup: ", row["id"], row["OC"], row['Proyecto'])
-
+for row in rows:
+    st.write("id:", row["id"])
     
