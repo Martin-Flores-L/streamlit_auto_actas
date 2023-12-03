@@ -105,3 +105,9 @@ if uploaded_file is not None:
     #Show SQLite data
     elif action == "Show data":
         pass
+
+
+
+    #CONNECT A DATABASE - TUTORIAL DONT WORK - CHECK A VIDEO OF THE CONNECTION WITH SUPABASE
+    #CREATE A PAGE FOR THE DATABASE THAT I CAN SEARCH FOR THE OC
+    #CREATE A PAGE FOR WEBSCRAPPING GET URLS
