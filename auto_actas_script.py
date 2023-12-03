@@ -116,7 +116,11 @@ if uploaded_file is not None:
     elif action == "Show data":
         
         # Show the data in SQLite
-        sbdb.get_all_rows(database_con)
+        rows = sbdb.get_all_rows(database_con)
+
+        # Convert the data to a Pandas DataFrame
+        df = pd.DataFrame(rows, columns=['id', 'EECC','OC','IP Hijo', 'Proyecto', 'total_OC', 'total_certificar','servicio_obra', 'termino_obra', 'posiciones', 'Download_date'])
+        st.write(df)
 
         
         
