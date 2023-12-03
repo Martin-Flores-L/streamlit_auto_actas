@@ -174,7 +174,7 @@ class Clean(Usuario):
         with conn.session as s:
             st.markdown(f"Note that `s` is a `{type(s)}`")
             s.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
-            self.csv.to_sql('actasdatabase_db', conn, if_exists='append', index=False)
+            self.csv.to_sql('actas', conn, if_exists='append', index=False)
             
         conn.close()
 
