@@ -4,6 +4,7 @@ import pandas as pd
 import pytz
 from datetime import datetime
 from class_actas import Printed
+from db import supabase_db
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
@@ -14,6 +15,10 @@ st.title('Automatic Actas Pangea')
 
 # UPLOAD FILE
 uploaded_file = st.file_uploader("Sube tu archivo")
+
+ #Initialize connection to supabase
+sbdb = supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
+
 
 
 if uploaded_file is not None:
@@ -101,16 +106,19 @@ if uploaded_file is not None:
         if st.button('Save to SQLite'):
             #Create a column with the date in my user.csv
             user.csv['Download_date'] = datetime.now(pytz.timezone('America/Bogota')).strftime("%d/%m/%Y %H:%M:%S")
-            #Save the data in SQLite
-            user.save_sqlite()
+           
+            #Save the data in supabase
+            sbdb.save_supabase(user.csv)
+
             #Show the data in SQLite
             st.write("Data saved to SQLite database.")            
 
 
     #Show SQLite data
-    elif action == "Show SQLite data":
-        #Show the data in SQLite
-        user.show_sqlite()
+    elif action == "Show data":
+        
+        # Show the data in SQLite
+        sbdb.run_query()
         
 
 #FALTA REQUERIMIENTO EN GITHUB

@@ -52,3 +52,5 @@ validators==0.22.0
 watchdog==3.0.0
 zipp==3.17.0
 sqlalchemy==1.4.31
+st-supabase-connection==0.0.1
+supabase==0.1.0

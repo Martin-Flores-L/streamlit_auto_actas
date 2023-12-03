@@ -5,7 +5,6 @@ from datetime import datetime
 import pytz
 import os
 import zipfile
-import sqlalchemy
 
 #Global variables
 #EECC = Proveedor
@@ -161,33 +160,7 @@ class Clean(Usuario):
         )
 
         delete_files(directory)
-
-
-
-    #Save data in SQLite
-
-    def save_sqlite(self):
-
-        #Create connection
-        conn = st.connection('actasdatabase_db', type='sql')
-
-        conn.session.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
-
-        conn.session.commit()
-
-        self.csv.to_sql('actas', conn, if_exists='append', index=False)
-
-        conn.close()
-
-        
-
-    #Show sqlite
-    def show_sqlite(self):
-        conn = st.connection('actas_database.db')
-        query = "SELECT * FROM actas"
-        df = pd.read_sql(query, conn)
-        st.write(df)
-        conn.close()        
+      
 
 
 class Printed(Clean):
