@@ -104,12 +104,4 @@ if uploaded_file is not None:
 
     #Show SQLite data
     elif action == "Show data":
-        
-        #Show the data from the database
-        
-        
-        
-
-#FALTA REQUERIMIENTO EN GITHUB
-#ACTUALIZAR EL DOWNLOAD_EXCEL_FILES
-#COMPRIMIR EN ZIP
+        pass
