@@ -4,7 +4,7 @@ import pandas as pd
 import pytz
 from datetime import datetime
 from class_actas import Printed
-from db import Supabase_db
+import db
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
@@ -15,11 +15,6 @@ st.title('Automatic Actas Pangea')
 
 # UPLOAD FILE
 uploaded_file = st.file_uploader("Sube tu archivo")
-
- #Initialize connection to supabase
-sbdb = Supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
-database_con = sbdb.init_connection()
-
 
 
 if uploaded_file is not None:
@@ -106,7 +101,7 @@ if uploaded_file is not None:
             user.csv['Download_date'] = datetime.now(pytz.timezone('America/Bogota')).strftime("%d/%m/%Y %H:%M:%S")
            
             #Save the data in supabase
-            sbdb.save_supabase(database_con, user.csv)
+            # sbdb.save_supabase(database_con, user.csv)
 
             #Show the data in SQLite
             st.write("Data saved to SQLite database.")            
@@ -115,14 +110,9 @@ if uploaded_file is not None:
     #Show SQLite data
     elif action == "Show data":
         
-        # Show the data in SQLite
-        rows = sbdb.get_all_rows(database_con)
-
-        # Convert the data to a Pandas DataFrame
-        # df = pd.DataFrame(rows, columns=['id', 'EECC','Proyecto','OC','IP Hijo','total_OC', 'total_certificar','servicio_obra', 'termino_obra','posiciones', 'download_date'])
-        # st.write(df)
-        for row in rows:
-            st.write(row)
+        #Show the data from the database
+        db.show_data()
+        
         
         
 
