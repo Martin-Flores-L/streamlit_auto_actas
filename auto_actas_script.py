@@ -4,7 +4,6 @@ import pandas as pd
 import pytz
 from datetime import datetime
 from class_actas import Printed
-from db import rows
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
@@ -99,19 +98,14 @@ if uploaded_file is not None:
         if st.button('Save to SQLite'):
             #Create a column with the date in my user.csv
             user.csv['Download_date'] = datetime.now(pytz.timezone('America/Bogota')).strftime("%d/%m/%Y %H:%M:%S")
-           
-            #Save the data in supabase
-            # sbdb.save_supabase(database_con, user.csv)
 
-            #Show the data in SQLite
-            st.write("Data saved to SQLite database.")            
+  
 
 
     #Show SQLite data
     elif action == "Show data":
         
         #Show the data from the database
-        rows()
         
         
         
