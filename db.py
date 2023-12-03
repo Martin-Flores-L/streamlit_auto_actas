@@ -22,9 +22,10 @@ class Supabase_db():
         return create_client(url, key)
 
     #function to run query in supabase
-    def run_query(self, conn):
-        self.conn = conn
-        return self.conn.table("actas").select("*").execute()
+    def get_all_rows(self, conn):
+        result = conn.table("actas").select("*").execute()
+        return result
+
 
     #function to save dataframe in supabase table
     def save_supabase(self, conn, dataframe):
