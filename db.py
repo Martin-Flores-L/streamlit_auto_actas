@@ -3,7 +3,7 @@ from supabase import create_client, Client
 
 # Initialize connection.
 
-@staticmethod
+
 @st.cache_resource
 def init_connection():
     url = st.secrets["SUPABASE_URL"]
