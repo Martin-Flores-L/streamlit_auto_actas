@@ -122,7 +122,7 @@ if uploaded_file is not None:
         # df = pd.DataFrame(rows, columns=['id', 'EECC','Proyecto','OC','IP Hijo','total_OC', 'total_certificar','servicio_obra', 'termino_obra','posiciones', 'download_date'])
         # st.write(df)
         for row in rows:
-            print(row)
+            st.write(row)
         
         
 
