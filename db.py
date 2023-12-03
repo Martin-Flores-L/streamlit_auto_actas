@@ -23,5 +23,5 @@ rows = run_query()
 
 # Print results.
 for row in rows:
-    st.write("id:", row["id"])
+    st.write("id:", row[0])
     
