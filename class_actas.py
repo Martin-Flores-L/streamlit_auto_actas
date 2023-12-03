@@ -170,15 +170,16 @@ class Clean(Usuario):
 
         #Create connection
         conn = st.connection('actasdatabase_db', type='sql')
-        #
-        with conn.session as s:
-            st.markdown(f"Note that `s` is a `{type(s)}`")
-            s.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
-            self.csv.to_sql('actas', s, if_exists='append', index=False)
 
-        s.commit()            
+        conn.session.execute('CREATE TABLE IF NOT EXISTS actas (EECC TEXT, PROYECTO TEXT, OC INTEGER, IP HIJO BLOB, total_OC REAL, total_certificar REAL, termino_obra DATE, servicio_obra DATE, posiciones INTEGER);' )
+
+        conn.commit()
+
+        self.csv.to_sql('actas', conn, if_exists='append', index=False)
+
         conn.close()
 
+        
 
     #Show sqlite
     def show_sqlite(self):
