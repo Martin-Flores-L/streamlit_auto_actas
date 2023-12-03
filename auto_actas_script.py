@@ -4,7 +4,7 @@ import pandas as pd
 import pytz
 from datetime import datetime
 from class_actas import Printed
-import db
+from db import rows
 from st_aggrid import GridOptionsBuilder, AgGrid
 
 #Set the page layout to wide
@@ -111,7 +111,7 @@ if uploaded_file is not None:
     elif action == "Show data":
         
         #Show the data from the database
-        db.show_data()
+        rows()
         
         
         
