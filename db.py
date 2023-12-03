@@ -21,11 +21,11 @@ class Supabase_db():
 
     #function to run query in supabase
     def run_query(self):
-        return supabase.table("actas").select("*").execute()
+        return self.table("actas").select("*").execute()
 
     #function to save dataframe in supabase table
     def save_supabase(self, dataframe):
         self.dataframe = dataframe
-        supabase.table("mytable").insert(self.dataframe).execute()
+        self.table("mytable").insert(self.dataframe).execute()
 
     

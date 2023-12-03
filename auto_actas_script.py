@@ -17,7 +17,9 @@ st.title('Automatic Actas Pangea')
 uploaded_file = st.file_uploader("Sube tu archivo")
 
  #Initialize connection to supabase
-sbdb = supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
+sbdb = Supabase_db(st.secrets["SUPABASE_URL"], st.secrets["SUPABASE_KEY"])
+
+sbdb.init_connection()
 
 
 
