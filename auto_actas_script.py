@@ -59,7 +59,7 @@ if uploaded_file is not None:
 
     # Create a sidebar for actions
     st.sidebar.title("Actions")
-    action = st.sidebar.selectbox("Choose an action", ["Show dataframe", "Clean dataframe", "Print dataframe", "Show SQLite data"])
+    action = st.sidebar.selectbox("Choose an action", ["Show dataframe", "Clean dataframe", "Print dataframe", "Show data"])
 
 
     #Show dataframe
